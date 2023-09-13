@@ -1,5 +1,8 @@
 
-
+card(counterspell).
+blue(counterspell).
+isValid(X) :- card(X), hasColor(X).
+hasColor(X) :- blue(X).
 
 
 father(Dad, Child) :- parent(Dad, Child), male(Dad).
