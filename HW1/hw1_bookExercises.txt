@@ -79,22 +79,23 @@ _______________________________________________________________________________
 
 Chpt. 2: (2.1 & 2.2)
 
-Exercise  2.1 Which of the following pairs of terms unify? Where relevant, give the variable instantiations that lead to successful unification.
+Exercise  2.1 Which of the following pairs of terms unify? 
+                Where relevant, give the variable instantiations that lead to successful unification.
 
-    bread  =  bread
-    ’Bread’  =  bread
-    ’bread’  =  bread
-    Bread  =  bread
-    bread  =  sausage
-    food(bread)  =  bread
-    food(bread)  =  X
-    food(X)  =  food(bread)
-    food(bread,X)  =  food(Y,sausage)
-    food(bread,X,beer)  =  food(Y,sausage,X)
-    food(bread,X,beer)  =  food(Y,kahuna_burger)
-    food(X)  =  X
-    meal(food(bread),drink(beer))  =  meal(X,Y)
-    meal(food(bread),X)  =  meal(X,drink(beer))
+    bread  =  bread                                 - unify
+    ’Bread’  =  bread                               - doesn't unify
+    ’bread’  =  bread                               - unify
+    Bread  =  bread                                 - doesn't unify
+    bread  =  sausage                               - doesn't unify
+    food(bread)  =  bread                           - doesn't unify
+    food(bread)  =  X                               - unify // X = food(bread)
+    food(X)  =  food(bread)                         - unify // X = bread
+    food(bread,X)  =  food(Y,sausage)               - unify // X = sausage, Y = bread
+    food(bread,X,beer)  =  food(Y,sausage,X)        - doesn't unify
+    food(bread,X,beer)  =  food(Y,kahuna_burger)    - doesn't unify
+    food(X)  =  X                                   - doesn't unify
+    meal(food(bread),drink(beer))  =  meal(X,Y)     - unify // X = food(bread), Y = drink(beer)
+    meal(food(bread),X)  =  meal(X,drink(beer))     - doesn't unify
 
 Exercise  2.2 We are working with the following knowledge base:
    house_elf(dobby).
