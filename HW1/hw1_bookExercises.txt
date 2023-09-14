@@ -1,6 +1,6 @@
 Chpt. 1: (1.1-1.5)
 
- Exercise  1.1 Which of the following sequences of characters are atoms, which are variables, and which are neither?
+Exercise  1.1 Which of the following sequences of characters are atoms, which are variables, and which are neither?
 
     vINCENT                 - atom
     Footmassage             - variable 
@@ -53,7 +53,7 @@ Exercise  1.4 Represent the following in Prolog:
     Zed is dead.                                            - dead(zed).
     Marsellus kills everyone who gives Mia a footmassage.   - kills(marsellus,X) :- footMassage(X,mia).
     Mia loves everyone who is a good dancer.                - loves(mia,X) :- goodDancer(X).
-    Jules eats anything that is nutritious or tasty.        - eats(jules, food) :- nutritious(food); tasty(food)
+    Jules eats anything that is nutritious or tasty.        - eats(jules, food) :- nutritious(food); tasty(food).
 
 Exercise  1.5 Suppose we are working with the following knowledge base:
 
@@ -78,4 +78,39 @@ _______________________________________________________________________________
 
 
 Chpt. 2: (2.1 & 2.2)
-- j
+
+Exercise  2.1 Which of the following pairs of terms unify? Where relevant, give the variable instantiations that lead to successful unification.
+
+    bread  =  bread
+    ’Bread’  =  bread
+    ’bread’  =  bread
+    Bread  =  bread
+    bread  =  sausage
+    food(bread)  =  bread
+    food(bread)  =  X
+    food(X)  =  food(bread)
+    food(bread,X)  =  food(Y,sausage)
+    food(bread,X,beer)  =  food(Y,sausage,X)
+    food(bread,X,beer)  =  food(Y,kahuna_burger)
+    food(X)  =  X
+    meal(food(bread),drink(beer))  =  meal(X,Y)
+    meal(food(bread),X)  =  meal(X,drink(beer))
+
+Exercise  2.2 We are working with the following knowledge base:
+   house_elf(dobby).
+   witch(hermione).
+   witch(’McGonagall’).
+   witch(rita_skeeter).
+   magic(X):-  house_elf(X).
+   magic(X):-  wizard(X).
+   magic(X):-  witch(X).
+
+Which of the following queries are satisfied? Where relevant, give all the variable instantiations that lead to success.
+
+    ?-  magic(house_elf).
+    ?-  wizard(harry).
+    ?-  magic(wizard).
+    ?-  magic(’McGonagall’).
+    ?-  magic(Hermione).
+
+Draw the search tree for the query magic(Hermione) .
