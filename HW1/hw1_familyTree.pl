@@ -152,16 +152,19 @@ female(lisa).
 female(mary).
 female(jenny).
 female(kate).
+
 male(homer).
 male(ward).
 male(wally).
 male(ted).
 male(tim).
 male(tom).
+
 spouse(marge, homer).
 spouse(june, ward).
 spouse(lisa, wally).
 spouse(mary, ted).
+
 parent(marge, maggie).
 parent(homer, maggie).
 parent(marge, lisa).
@@ -178,6 +181,28 @@ parent(ted, tim).
 parent(mary, tim).
 parent(ted, tom).
 parent(mary, tom).
+
+mother_in_law(Mother, Person) :-
+  female(Mother),
+  parent(Mother, Spouse),
+  (spouse(Spouse, Person); spouse(Person, Spouse)).
+
+daughter_in_law(Daughter, Person) :-
+  female(Daughter),
+  parent(Person, Spouse),
+  (spouse(Spouse, Daughter); spouse(Daughter, Spouse)).
+
+/* a partner's brother */
+brother_in_law(Brother, Person) :-
+  male(Brother),
+  brother(Brother, Spouse),
+  (spouse(Spouse, Person); spouse(Person, Spouse)).
+
+/* a sibling's husband */
+brother_in_law(Brother, Person) :-
+  male(Brother),
+  sibling(Person, Sibling),
+  (spouse(Brother, Sibling); spouse(Sibling, Brother)).
 
 
 father(Dad, Child) :- parent(Dad, Child), male(Dad).
