@@ -108,10 +108,37 @@ Exercise  2.2 We are working with the following knowledge base:
 
 Which of the following queries are satisfied? Where relevant, give all the variable instantiations that lead to success.
 
-    ?-  magic(house_elf).
-    ?-  wizard(harry).
-    ?-  magic(wizard).
-    ?-  magic(’McGonagall’).
-    ?-  magic(Hermione).
+    ?-  magic(house_elf).       - Can't be satisfied - because the argument passed inside can't be unified, as there is no atom to unify house_elf
+    ?-  wizard(harry).          - Can't be satisfied - because there is no clause that matches the functor: wizard()
+    ?-  magic(wizard).          - Can't be satisfied - because the argument passed inside can't be unified, as there is no atom to unify wizard 
+    ?-  magic(’McGonagall’).    - Can be satisfied - given the property: 'atom' = atom; we can unify magic('McGonagall'). Prolog looks at the query and finds the rule magic(X) :- witch(X) [after trying house_elf(X) & wizard(X)]. It then tries to satisfy witch(X) where X = 'McGonagall' - which it can do!
+    ?-  magic(Hermione).        - Can be satisfied - because the argument passed to magic() is a variable, the result will be a sequence of all things that can satisfy the query.
+                                                   - Hermione = dobby; hermione; 'McGonagall'; rita_skeeter
 
 Draw the search tree for the query magic(Hermione) .
+
+?- magic(Hermione)
+    - abstract Hermione to _G34
+    - tries to find clause in KB that matches magic --> finds a rule magic(X) [line 105] and instantiates --> add the goal of the rule, house_elf(_G34), to Prolog's stack
+    - tries to unify the goal house_elf(_G34) --> finds satisfying clause [line 101] and unifies
+    - returns Hermione = dobby to user
+?- ;
+    - backtracks to choice point described at line 123
+    - tries to unify the goal house_elf(_G34) --> can't find anymore matching functors --> backtracks to earlier choice point described at line 122
+    - tries to find clause in KB that matches magic --> finds a rule magic(X) [line 106] and instantiates --> add the goal of the rule, wizard(_G34), to Prolog's stack
+    - tries to unify the goal wizard(_G34) --> can't find any matching functors --> backtracks to earlier choice point described at line 127
+    - tries to find clause in KB that matches magic --> finds a rule magic(X) [line 107] and instatiates --> add the goal of the rule, witch(_G34), to Prolog's stack
+    - tries to unify the goal witch(_G34) --> finds satisfying clause [line 102] and unifies
+    - returns Hermione = hermione to user
+?- ;
+    - backtracks to choice point described at line 131
+    - tries to unify the goal witch(_G34) --> finds satisfying clause [line 103] and unifies
+    - returns Hermione = 'McGonagall' to user
+?- ;
+    - backtracks to choice point described at line 135
+    - tries to unify the goal witch(_G34) --> finds satisfying clause [line 104] and unifies
+    - returns Hermione = rita_skeeter to user
+?- ;
+    - backtracks to choice point described at line 139
+    - tries to unify the goal witch(_G34) --> can't find anymore matching functors --> algorithm terminates as there are no more matching clauses and the stack is empty
+    - returns false to user as termination
