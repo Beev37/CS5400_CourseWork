@@ -1,28 +1,6 @@
-% Book Exercise: 2.3
-
-/* 
-word(determiner,a).
-word(determiner,every).
-word(noun,criminal).
-word(noun,'big  kahuna  burger').
-word(verb,eats).
-word(verb,likes).
-
-sentence(Word1,Word2,Word3,Word4,Word5):-
-        word(determiner,Word1),
-        word(noun,Word2),
-        word(verb,Word3),
-        word(determiner,Word4),
-        word(noun,Word5). 
-*/
-
-% sentence(A,B,C,D,E). <-- query I used for ex. 2.3.
-
-% ______________________________________________________
-
 % Book Exercise: 2.4
 
-/*
+
 word(astante,  a,s,t,a,n,t,e).
 word(astoria,  a,s,t,o,r,i,a).
 word(baratto,  b,a,r,a,t,t,o).
@@ -44,16 +22,6 @@ crossword(Vword1,Vword2,Vword3,Hword1,Hword2,Hword3) :-
         Vword3 \= Hword1, Vword3 \= Hword2, Vword3 \= Hword3,
         Vword1 \= Vword2, Vword1 \= Vword3, Vword2 \= Vword3,
         Hword1 \= Hword2, Hword1 \= Hword3, Hword2 \= Hword3.
-*/
 
-% crossword(A,B,C,D,E,F). <-- query I used for ex. 2.4.
 
-% ______________________________________________________________
-
-% Canvas Exercise: 1
-
-% ______________________________________________________________
-
-% Canvas Exercise: 2
-
-% ______________________________________________________________
+% crossword(A,B,C,D,E,F). <-- query I used for results.
