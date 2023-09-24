@@ -1,20 +1,20 @@
 % Book Exercise: 2.3
 
-/* 
-word(determiner,a).
-word(determiner,every).
-word(noun,criminal).
-word(noun,'big  kahuna  burger').
-word(verb,eats).
-word(verb,likes).
+
+wordd(determiner,a).
+wordd(determiner,every).
+wordd(noun,criminal).
+wordd(noun,'big  kahuna  burger').
+wordd(verb,eats).
+wordd(verb,likes).
 
 sentence(Word1,Word2,Word3,Word4,Word5):-
-        word(determiner,Word1),
-        word(noun,Word2),
-        word(verb,Word3),
-        word(determiner,Word4),
-        word(noun,Word5). 
-*/
+        wordd(determiner,Word1),
+        wordd(noun,Word2),
+        wordd(verb,Word3),
+        wordd(determiner,Word4),
+        wordd(noun,Word5). 
+
 
 % sentence(A,B,C,D,E). <-- query I used for ex. 2.3.
 
@@ -22,7 +22,6 @@ sentence(Word1,Word2,Word3,Word4,Word5):-
 
 % Book Exercise: 2.4
 
-/*
 word(astante,  a,s,t,a,n,t,e).
 word(astoria,  a,s,t,o,r,i,a).
 word(baratto,  b,a,r,a,t,t,o).
@@ -44,7 +43,6 @@ crossword(Vword1,Vword2,Vword3,Hword1,Hword2,Hword3) :-
         Vword3 \= Hword1, Vword3 \= Hword2, Vword3 \= Hword3,
         Vword1 \= Vword2, Vword1 \= Vword3, Vword2 \= Vword3,
         Hword1 \= Hword2, Hword1 \= Hword3, Hword2 \= Hword3.
-*/
 
 % crossword(A,B,C,D,E,F). <-- query I used for ex. 2.4.
 
@@ -67,19 +65,29 @@ neighbor_bottom(clock, paperclip).
 neighbor_bottom(guitar, scissors).
 
 
+% Below 2 lines are my attempts at describing left_of() that can determine whether an object is to the left of another
+% regardless of what row they are located in. However, this implementation results in an infinite loop after finding
+% the initial answer. This loop prevents it from being useful to both "above()" and "below()".
+        % left_of(X,Y):- neighbor_left(X,Y).
+        % left_of(X,Y):- (neighbor_left(X,Z); neighbor_bottom(X,Z); neighbor_top(X,Z)), left_of(Z,Y).
+
 left_of(X,Y):- neighbor_left(X,Y).
-left_of(X,Y):- (neighbor_left(X,Z); neighbor_bottom(X,Z); neighbor_top(X,Z)), left_of(Z,Y).
-%left_of(paperclip, guitar) --> true
+left_of(X,Y):- (neighbor_left(X,Z); neighbor_top(X,Z)), left_of(Z,Y).
+
+% Below 2 lines are my attempts at describing right_of() that can determine whether an object is to the right of another
+% regardless of what row they are located in. However, this implementation results in an infinite loop after finding
+% the initial answer. This loop prevents it from being useful to both "above()" and "below()".
+        % right_of(X,Y):- neighbor_right(X,Y).
+        % right_of(X,Y):- (neighbor_right(X,Z); neighbor_bottom(X,Z); neighbor_top(X,Z)), right_of(Z,Y).
+
+right_of(X,Y):- neighbor_right(X,Y).
+right_of(X,Y):- (neighbor_right(X,Z); neighbor_top(X,Z)), right_of(Z,Y).
 
 above(X,Y):- neighbor_top(X,Y).
 above(X,Y):- neighbor_top(X,Z), (left_of(Z,Y); right_of(Z,Y)).
 
-right_of(X,Y):- neighbor_right(X,Y).
-right_of(X,Y):- (neighbor_right(X,Z); neighbor_bottom(X,Z); neighbor_top(X,Z)), right_of(Z,Y).
-%right_of(scissors, clock) --> true
-
 below(X,Y):- neighbor_bottom(X,Y).
-%below(X,Y):- neight
+below(X,Y):- neighbor_bottom(X,Z), (left_of(Z,Y); right_of(Z,Y)).
 
 
 % ______________________________________________________________
@@ -115,7 +123,7 @@ link(q, r, 6).
 link(r, t, 6).
 link(t, b, 6).
 
-:-['cluster_data'].
+% :-['cluster_data'].
 
 path(X,Y,C) :- link(X,Y,C).
 path(X,Y,C) :- link(X,Z,C), path(Z,Y,C).
