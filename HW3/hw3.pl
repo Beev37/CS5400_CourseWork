@@ -1,3 +1,4 @@
+ % Exercise 1: LPN exerices from chpt. 5
  /*
  Exercise  5.1 How does Prolog respond to the following queries?
 
@@ -55,6 +56,30 @@
     
     *(7,(3+2))  =  7*(+(3,2)).
         > true
-
 */
+
+% Exercise 2: Successor Structures
+
+natural_number(0).
+natural_number(s(X)):- 
+    natural_number(X).
+
+plus(0, X, X) :- natural_number(X).
+plus(s(X), Y, s(Z)) :- 
+    plus(X, Y, Z).
+
+times(0, _, 0).
+times(s(X), Y, Product) :-
+    times(Y, X, Previous),
+    plus(Previous, Y, Product).
+
+factorial(0, _).
+factorial(s(X), Result):- 
+    times(s(X), X, Result).
+
+test1:- factorial(s(s(s(s(0)))), X), write(X), nl.
+test2:- factorial(s(s(s(0))), X), write(X), nl.
+
+
+% Exercise 3: Math Maze
 
