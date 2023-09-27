@@ -83,3 +83,12 @@ test2:- factorial(s(s(s(0))), X), write(X), nl.
 
 % Exercise 3: Math Maze
 
+% list = [N1,+,13,*,N2,/,N3,+,N4,+,12,*,N5,-,N6,-,11,+,N7,*,N8,/,N9,-,10,=,66]
+%            6    1    2    7    8    3    9    10   11   4    5    12      
+
+mathmaze(X):-
+    permutation([1,2,3,4,5,6,7,8,9],X),
+    tryMaze(X).
+    
+tryMaze([N1,N2,N3,N4,N5,N6,N7,N8,N9]):-
+    66 is N1+13*N2/N3+N4+12*N5-N6-11+N7*N8/N9-10.
