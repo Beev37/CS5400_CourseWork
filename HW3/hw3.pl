@@ -58,6 +58,7 @@
         > true
 */
 
+%_______________________________________________________________________________
 % Exercise 2: Successor Structures
 
 natural_number(0).
@@ -77,10 +78,11 @@ factorial(0, _).
 factorial(s(X), Result):- 
     times(s(X), X, Result).
 
-test1:- factorial(s(s(s(s(0)))), X), write(X), nl.
-test2:- factorial(s(s(s(0))), X), write(X), nl.
+% test1:- factorial(s(s(s(s(0)))), X), write(X), nl.
+% test2:- factorial(s(s(s(0))), X), write(X), nl.
 
 
+%_______________________________________________________________________________
 % Exercise 3: Math Maze
 
 % list = [N1,+,13,*,N2,/,N3,+,N4,+,12,*,N5,-,N6,-,11,+,N7,*,N8,/,N9,-,10,=,66]
@@ -92,3 +94,23 @@ mathmaze(X):-
     
 tryMaze([N1,N2,N3,N4,N5,N6,N7,N8,N9]):-
     66 is N1+13*N2/N3+N4+12*N5-N6-11+N7*N8/N9-10.
+
+
+%_______________________________________________________________________________
+% Exercise 4: Doubled List
+
+double([], []).
+double([Head|Tail], [DH1, DH2|DT]):-
+    DH1 = Head,
+    DH2 = Head,
+    double(Tail, DT).
+
+
+%_______________________________________________________________________________
+% Exercise 5: Ordered Triples
+
+
+orderedTriples([],[],[],[]).
+orderedTriples([LH1|T1],[LH2|T2],[LH3|T3], [Result|RT]):-
+    msort([LH1,LH2,LH3], Result),
+    orderedTriples(T1,T2,T3,RT).
