@@ -48,4 +48,40 @@ add(zero, X, X):-
 add(s(X), Y, s(Z)):- 
     add(X,Y,Z).
 
+even(zero).
+even(s(s(X))):- even(X).
+
+odd(s(X)):- even(X).
+
+greaterThan(s(_),zero).
+greaterThan(s(X), s(Y)):-
+    greaterThan(X, Y).
+
+select(X, [X|Tail], Tail).
+select(X, [H|Tail], [H|SelectedTail]):-
+    select(X, Tail, SelectedTail).
+
+permutation([],[]).
+permutation(List,[H|T]):-
+    select(H, List, Remaining),
+    permutation(Remaining, T).
+
+edge(a,b).
+edge(a,c).
+edge(b,d).
+edge(c,d).
+edge(d,e).
+edge(f,g).
+
+connected(X,Y,[X,Y]):-
+    edge(X,Y).
+
+connected(X,Y,[X|Tail]):-
+    edge(X,Z),
+    connected(Z,Y,Tail).
+
+
+suffix(List,List).
+suffix(List1,[_|Ys]):-
+    suffix(List1, Ys).
 
