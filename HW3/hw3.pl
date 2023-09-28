@@ -136,10 +136,7 @@ remove(X, [H|Tail], [H|Remaining]):-
     X \= H, % why is this line so important???
     remove(X, Tail, Remaining).
 
-function([],[]).
-function([H|T], [H|Result]):-
+no_doubles([],[]).
+no_doubles([H|T], [H|Result]):-
     remove(H, T, R1),
-    function(R1, Result).
-
-
-
+    no_doubles(R1, Result).
