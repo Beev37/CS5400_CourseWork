@@ -99,18 +99,47 @@ tryMaze([N1,N2,N3,N4,N5,N6,N7,N8,N9]):-
 %_______________________________________________________________________________
 % Exercise 4: Doubled List
 
+% double([], []).
+% double([Head|Tail], [DH1, DH2|DT]):-
+%     DH1 = Head,
+%     DH2 = Head,
+%     double(Tail, DT).
+
 double([], []).
-double([Head|Tail], [DH1, DH2|DT]):-
-    DH1 = Head,
-    DH2 = Head,
+double([Head|Tail], [Head, Head|DT]):-
     double(Tail, DT).
 
 
 %_______________________________________________________________________________
 % Exercise 5: Ordered Triples
 
-
 orderedTriples([],[],[],[]).
 orderedTriples([LH1|T1],[LH2|T2],[LH3|T3], [Result|RT]):-
     msort([LH1,LH2,LH3], Result),
     orderedTriples(T1,T2,T3,RT).
+
+
+%_______________________________________________________________________________
+% Exercise 6: No Doubles in List
+
+% ______First Attempt______
+% no_doubles([],[]).
+% no_doubles([L1|T1], [L2|T2]):-
+%     L2 = L1,
+%     \+member(L1, T2),
+%     no_doubles(T1, T2).
+
+remove(_, [], []).
+remove(X, [X|Tail], Remaining):-
+    remove(X, Tail, Remaining).
+remove(X, [H|Tail], [H|Remaining]):-
+    X \= H, % why is this line so important???
+    remove(X, Tail, Remaining).
+
+function([],[]).
+function([H|T], [H|Result]):-
+    remove(H, T, R1),
+    function(R1, Result).
+
+
+
