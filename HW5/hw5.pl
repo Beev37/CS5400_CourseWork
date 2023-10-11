@@ -22,19 +22,39 @@ Binary trees are trees where all internal nodes have exactly two children. The s
 %     swap(A, R),
 %     swap(B, R).
 
-% test0:-
-%     swap(tree(leaf(1), null), T).
 
-% test1:- 
-%     swap(tree(tree(leaf(1), leaf(2)), leaf(4)), T).
+test1:- 
+    swap(tree(tree(leaf(1), leaf(2)), leaf(4)), T).
+    %tree(tree(A), leaf(4)). -swap-> T = tree(leaf(4), tree(A)).
 
 
-swap(tree(null, null), tree(null, null)).
-swap(tree(leaf(A), leaf(B)), tree(leaf(B), leaf(A))).
-swap(tree(leaf(A), null), tree(null, leaf(A))).
-swap(tree(null, leaf(A)), tree(leaf(A), null)).
-swap(tree(A, leaf(_)), tree())
-swap(tree(A, B), tree(B, A)):-
-    swap(A, _),
-    swap(B, _).
+% swap(tree(null, null), tree(null, null)). %
+
+% swap(tree(leaf(A), null), tree(null, leaf(A))).
+
+% swap(tree(null, leaf(A)), tree(leaf(A), null)).
+
+% swap(tree(leaf(A), leaf(B)), tree(leaf(B), leaf(A))). %SWAPPING TWO LEAF NODES
+
+% swap(tree(tree(A), leaf(X)), tree(leaf(X), tree(A))):-
+%   swap(A, _). 
+
+% swap(tree(leaf(X), tree(A)), tree(tree(A), leaf(X))).
+%   swap(A, _).
+
+% swap(tree(A, B), tree(B, A)):-
+%   swap(A, _),
+%   swap(B, _).
+
+% swap(tree(leaf(A), leaf(B)), tree(leaf(B), leaf(A))). %SWAPPING TWO LEAF NODES
+
+% swap(tree(tree(A), leaf(X)), tree(leaf(X), tree(R))):-
+%   swap(A, R). 
+
+% swap(tree(leaf(X), tree(A)), tree(tree(R), leaf(X))).
+%   swap(A, R).
+
+% swap(tree(A, B), tree(B, A)):-
+%   swap(A, _),
+%   swap(B, _).
 
