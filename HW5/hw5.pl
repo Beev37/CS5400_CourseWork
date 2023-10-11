@@ -55,9 +55,9 @@ swap(tree(X, Y), tree(NewY, NewX)):-
     swap(X, NewX),
     swap(Y, NewY).
 
+
+
 /*__________________________________________________________________*/
-
-
 %Exercise 2: Subtree(S, T)
 %ASSUMPTION: There will never be a node with only one child.
 
@@ -98,9 +98,9 @@ subtree(Input, tree(_, _, R)):-
 % subtree(Visited, Input, tree(H, L, R)):-
 %     \+ member()
 
+
+
 /*__________________________________________________________________*/
-
-
 %Exercise 3: path(X, Tree, Path)
 
 %tree(a, tree(b, tree(d, void, void), tree(e, tree(h, void, void), tree(i, void, void))), tree(c, tree(f, void, void), tree(g, void, void)))
