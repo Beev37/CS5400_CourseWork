@@ -46,15 +46,19 @@ test1:-
 %   swap(A, _),
 %   swap(B, _).
 
-% swap(tree(leaf(A), leaf(B)), tree(leaf(B), leaf(A))). %SWAPPING TWO LEAF NODES
+swap(tree(leaf(A), leaf(B)), tree(leaf(B), leaf(A))):-
+  write(case1), nl. %SWAPPING TWO LEAF NODES
 
-% swap(tree(tree(A), leaf(X)), tree(leaf(X), tree(R))):-
-%   swap(A, R). 
+swap(tree(tree(A), leaf(X)), tree(leaf(X), tree(R))):-
+  write(case2), nl,
+  swap(A, R). 
 
-% swap(tree(leaf(X), tree(A)), tree(tree(R), leaf(X))).
-%   swap(A, R).
+swap(tree(leaf(X), tree(A)), tree(tree(R), leaf(X))):-
+  write(case3), nl,
+  swap(A, R).
 
-% swap(tree(A, B), tree(B, A)):-
-%   swap(A, _),
-%   swap(B, _).
+swap(tree(tree(A), tree(B)), tree(tree(RB), tree(RA))):-
+  write(case4), nl,
+  swap(A, RA),
+  swap(B, RB).
 
