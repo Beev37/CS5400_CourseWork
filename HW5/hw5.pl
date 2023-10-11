@@ -45,7 +45,7 @@ Binary trees are trees where all internal nodes have exactly two children. The s
 %   swap(A, RA),
 %   swap(B, RB).
 
-test1:- 
+test1(T):- 
     swap(tree(tree(leaf(1), leaf(2)), leaf(4)), T).
     %tree(tree(A), leaf(4)). -swap-> T = tree(leaf(4), tree(A)).
 
@@ -54,6 +54,8 @@ swap(leaf(X), leaf(X)).
 swap(tree(X, Y), tree(NewY, NewX)):-
     swap(X, NewX),
     swap(Y, NewY).
+
+/*__________________________________________________________________*/
 
 
 %Exercise 2: Subtree(S, T)
@@ -66,6 +68,9 @@ swap(tree(X, Y), tree(NewY, NewX)):-
 % testing if finding subtree works with bigger tree to search through
 test2:-
     subtree(tree(c, tree(f, void, void), tree(g, void, void)), tree(a, tree(b, tree(d, void, void), tree(e, tree(h, void, void), tree(i, void, void))), tree(c, tree(f, void, void), tree(g, void, void)))).
+
+test2(T):-
+    subtree(T , tree(a, tree(b, tree(d, void, void), tree(e, tree(h, void, void), tree(i, void, void))), tree(c, tree(f, void, void), tree(g, void, void)))).
 
 %____Attempt 1:
 % subtree(tree(X, void, void), tree(X, void, void)).
@@ -93,14 +98,16 @@ subtree(Input, tree(_, _, R)):-
 % subtree(Visited, Input, tree(H, L, R)):-
 %     \+ member()
 
+/*__________________________________________________________________*/
+
 
 %Exercise 3: path(X, Tree, Path)
 
 %tree(a, tree(b, tree(d, void, void), tree(e, tree(h, void, void), tree(i, void, void))), tree(c, tree(f, void, void), tree(g, void, void)))
 
 %____Attempt 1:
-test3:-
-    path(i, tree(a, tree(b, tree(d, void, void), tree(e, tree(h, void, void), tree(i, void, void))), tree(c, tree(f, void, void), tree(g, void, void))), Path).
+test3(P):-
+    path(i, tree(a, tree(b, tree(d, void, void), tree(e, tree(h, void, void), tree(i, void, void))), tree(c, tree(f, void, void), tree(g, void, void))), P).
 
 path(X, tree(X, _, _), [X]).
 
