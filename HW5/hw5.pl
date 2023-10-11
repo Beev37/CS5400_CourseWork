@@ -94,6 +94,23 @@ subtree(Input, tree(_, _, R)):-
 %     \+ member()
 
 
+%Exercise 3: path(X, Tree, Path)
+
+%tree(a, tree(b, tree(d, void, void), tree(e, tree(h, void, void), tree(i, void, void))), tree(c, tree(f, void, void), tree(g, void, void)))
+
+%____Attempt 1:
+test3:-
+    path(i, tree(a, tree(b, tree(d, void, void), tree(e, tree(h, void, void), tree(i, void, void))), tree(c, tree(f, void, void), tree(g, void, void))), Path).
+
+path(X, tree(X, _, _), [X]).
+
+path(X, tree(Y, L, _), [Y|Path]):-
+    path(X, L, Path).
+
+path(X, tree(Y, _, R), [Y|Path]):-
+    path(X, R, Path).
+
+
 
 
 
