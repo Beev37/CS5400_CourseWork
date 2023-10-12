@@ -185,13 +185,14 @@ pie_eater(Eater):-
     member(house(Eater, _, _, pie, _), X).
 
 solve(X):-
-    X = [H1, H2, H3, H4, H5],
+    X = [_, _, _, _, _],
+    % X = [H1, H2, H3, H4, H5],
 
-    H1 = house(Nat1, Mus1, Hob1, Food1, Color1),
-    H2 = house(Nat2, Mus2, Hob2, Food2, Color2),
-    H3 = house(Nat3, Mus3, Hob3, Food3, Color3),
-    H4 = house(Nat4, Mus4, Hob4, Food4, Color4),
-    H5 = house(Nat5, Mus5, Hob5, Food5, Color5),
+    % H1 = house(Nat1, Mus1, Hob1, Food1, Color1),
+    % H2 = house(Nat2, Mus2, Hob2, Food2, Color2),
+    % H3 = house(Nat3, Mus3, Hob3, Food3, Color3),
+    % H4 = house(Nat4, Mus4, Hob4, Food4, Color4),
+    % H5 = house(Nat5, Mus5, Hob5, Food5, Color5),
 
     % The Irish person lives next to the yellow house.
     adjacent(house(irish, _, _, _, _), house(_, _, _, _, yellow), X),
@@ -239,10 +240,10 @@ solve(X):-
     adjacent(house(_, _, trainspotting, _, _), house(_, jazz, _, _, _), X), 
 
     % Someone loves pie.
-    member(house(_, _, _, pie, _), X),
+    member(house(_, _, _, pie, _), X).
 
-    permutation([american, czech, dutch, irish, japanese], [Nat1, Nat2, Nat3, Nat4, Nat5]),
-    permutation([country, grunge, hiphop, jazz, jpop], [Mus1, Mus2, Mus3, Mus4, Mus5]),
-    permutation([green, orange, pink, purple, yellow], [Color1, Color2, Color3, Color4, Color5]),
-    permutation([embroidery, gardening, glassblowing, pachinko, trainspotting], [Hob1, Hob2, Hob3, Hob4, Hob5]),
-    permutation([beets, donuts, pie, pizza, tofu], [Food1, Food2, Food3, Food4, Food5]).
+    % permutation([american, czech, dutch, irish, japanese], [Nat1, Nat2, Nat3, Nat4, Nat5]),
+    % permutation([country, grunge, hiphop, jazz, jpop], [Mus1, Mus2, Mus3, Mus4, Mus5]),
+    % permutation([green, orange, pink, purple, yellow], [Color1, Color2, Color3, Color4, Color5]),
+    % permutation([embroidery, gardening, glassblowing, pachinko, trainspotting], [Hob1, Hob2, Hob3, Hob4, Hob5]),
+    % permutation([beets, donuts, pie, pizza, tofu], [Food1, Food2, Food3, Food4, Food5]).
