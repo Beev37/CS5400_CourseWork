@@ -118,6 +118,9 @@ path(X, tree(Y, _, R), [Y|Path]):-
     path(X, R, Path).
 
 
+% ______Class Exercise Below_______
 
+% Write a predicate "isotree(TreeX, TreeY)", that is true if TreeX is isomorphic with TreeY.
+%I think this is just "swap/2" from the first problem of HW5.
 
 
