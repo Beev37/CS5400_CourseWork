@@ -30,28 +30,69 @@ writeOut([H|T]) :-
 % BEGIN CHANGES
 
 % red_edge_sequence/1
-% state(a, green).
-% state(b, red).
-% state(c, red).
-% state(d, red).
-% state(e, green).
-% state(f, green).
-% state(g, green).
-% state(h, green).
-% state(i, green).
-% state(j, red).
-% state(k, green).
-% state(l, red).
 
-% test1:-
-%   red_edge_sequence([a,c,f,h,k]).
+test1:-
+  ['testNet1.pl'],
+  red_edge_sequence([b,d,f,h,k]),
+  red_edge_sequence([b,d,f,h,i,k]),
+  red_edge_sequence([b,d,i,k]).
 
-% red_edge_sequence([H|T]):-
-%   state(H, red),
-%   red_edge_sequence(T).
+red_edge_sequence([H|[]]):-
+  end_state(H).
+
+red_edge_sequence([H1, H2|T]):-
+  trans(H1, H2, red),
+  red_edge_sequence([H2|T]).
 
 % alternating_edge_sequence/1
 
+test2:-
+  ['testNet1.pl'],
+  alternating_edge_sequence([b,d,f,h,j]),
+  alternating_edge_sequence([a,f,h,j]),
+  alternating_edge_sequence([a,d,f,g,j]),
+  alternating_edge_sequence([a,d,e,i,k]),
+  alternating_edge_sequence([b,d,f,g,j]),
+  alternating_edge_sequence([b,d,e,i,k]).
+
+alternating_edge_sequence(List):-
+  (
+    alt_edge_seq(List, green)
+    ;
+    alt_edge_seq(List, red)
+  ).
+
+alt_edge_seq([H|[]], _):-
+  end_state(H).
+
+alt_edge_seq([H1, H2|T], Color):-
+  (Color = red -> X = green ; X = red),
+  trans(H1, H2, Color),
+  alt_edge_seq([H2|T], X).
+
+
 % matching_edge_state_sequence/1
+
+test3:-
+  ['testNet1.pl'],
+  matching_edge_state_sequence([a,f,g,h,j]),
+  matching_edge_state_sequence([b,d,i,k]).
+
+matching_edge_state_sequence(List):-
+  (
+    mtch_edg_stt_seq(List, red)
+    ;
+    mtch_edg_stt_seq(List, green)
+  ).
+
+mtch_edg_stt_seq([H|[]], _):-
+  end_state(H).
+
+mtch_edg_stt_seq([H1, H2|T], Color):-
+  state(H1, Color),
+  state(H2, Color),
+  trans(H1, H2, Color),
+  mtch_edg_stt_seq([H2|T], Color).
+
 
 % END CHANGES
