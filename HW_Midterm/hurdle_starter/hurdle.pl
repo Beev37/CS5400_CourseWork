@@ -36,16 +36,12 @@ correctSpots([H1|T1], SameSpots, [H2|T2]):-
 
 
 correctNumber([], 0, 5, _).
-
-% correctNumber([_|CT])
-
 correctNumber([CH|CT], RightLetter, Index, Solution):-
   % member(CH, Solution),
   memberOutOfIndex(CH, Index, Solution),
   X is RightLetter - 1,
   Y is Index + 1,
   correctNumber(CT, X, Y, Solution).
-
 correctNumber([_|CT], RightLetter, Index, Solution):-
   Y is Index + 1,
   correctNumber(CT, RightLetter, Y, Solution).
@@ -59,17 +55,16 @@ memberOutOfIndex(Char, Index, Solution):-
     member(Char, After)
   ),
   !.
-% shock // earth
 
 letterToSplitWith(0, [SolH|_], SolH).
 letterToSplitWith(Index, [_|SolT], SplitLetter):-
   Y is Index - 1,
   letterToSplitWith(Y, SolT, SplitLetter).
 
+
 guess(ClueWord, RightSpot, RightLetter, GuessWord):-
   correctSpots(ClueWord, RightSpot, GuessWord),
   correctNumber(ClueWord, RightLetter, 0, GuessWord).
-
 
 
 
