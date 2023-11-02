@@ -44,18 +44,29 @@ correctNumber([_|CT], RightLetter, Index, Solution):-
   Y is Index + 1,
   correctNumber(CT, RightLetter, Y, Solution).
 
+% memberOutOfIndex(Char, Index, Solution):-
+%   letterToSplitWith(Index, Solution, SpLetter),
+%   append(Before, [SpLetter|After], Solution), %append(BS, [r|AS], [a,c,r,e,s]) --> BS = [a,c] ; AS = [e,s]
+%   (
+%     member(Char, Before)
+%     ;
+%     member(Char, After)
+%   ),
+%   !.
+
 memberOutOfIndex(Char, Index, Solution):-
   letterToSplitWith(Index, Solution, SpLetter),
-  append(Before, [SpLetter|After], Solution), %append(BS, [r|AS], [a,c,r,e,s]) --> BS = [a,c] ; AS = [e,s]
-  (
-    member(Char, Before)
-    ;
-    member(Char, After)
-  ),
-  !.
+  append(Before, [SpLetter|_], Solution),
+  member(Char, Before).
+
+memberOutOfIndex(Char, Index, Solution):-
+  letterToSplitWith(Index, Solution, SpLetter),
+  append(_, [SpLetter|After], Solution),
+  member(Char, After).
 
 letterToSplitWith(0, [SolH|_], SolH).
 letterToSplitWith(Index, [_|SolT], SplitLetter):-
+  Index > 0,
   Y is Index - 1,
   letterToSplitWith(Y, SolT, SplitLetter).
 
