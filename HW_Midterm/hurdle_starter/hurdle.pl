@@ -24,12 +24,11 @@ solve(Solution) :-
   word(Solution),
   testGuesses(Solution).
 
-correctSpots([], 0, []).
 
+correctSpots([], 0, []).
 correctSpots([H|T1], SameSpots, [H|T2]):-
   X is SameSpots - 1,
   correctSpots(T1, X, T2).
-
 correctSpots([H1|T1], SameSpots, [H2|T2]):-
   H1\=H2,
   correctSpots(T1, SameSpots, T2).
@@ -37,7 +36,6 @@ correctSpots([H1|T1], SameSpots, [H2|T2]):-
 
 correctNumber([], 0, 5, _).
 correctNumber([CH|CT], RightLetter, Index, Solution):-
-  % member(CH, Solution),
   memberOutOfIndex(CH, Index, Solution),
   X is RightLetter - 1,
   Y is Index + 1,
@@ -64,7 +62,7 @@ letterToSplitWith(Index, [_|SolT], SplitLetter):-
 
 guess(ClueWord, RightSpot, RightLetter, GuessWord):-
   correctSpots(ClueWord, RightSpot, GuessWord),
-  correctNumber(ClueWord, RightLetter, 0, GuessWord).
+  correctNumber(ClueWord, RightLetter, 0, GuessWord). %wrong output when there are no letters in the wrong spot
 
 
 
