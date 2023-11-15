@@ -38,14 +38,33 @@ insertAt x ys i
 
 -- ** Exercise 6: Write a function that removes all duplicate elements from a list. You may use whatever library functions you need except 'nub'. You may write whatever helper functions you need. It might help to think about how you would have done this recursively in Prolog.
 
-removeDup :: a -> [a] -> [a]
-removeDup x [] = []
-removeDup x xs = 
+removeDup :: (Eq a) => [a] -> [a]
+removeDup [] = []
+removeDup (x:xs)
+    | member x xs = removeDup xs
+removeDup (x:xs) = x:(removeDup xs)
 
+
+member :: (Eq a) => a -> [a] -> Bool 
+member x [] = False
+member x (y:ys)
+    | x == y = True
+    | otherwise = member x ys
 
 -- ** Exercise 7: Write a function that takes a list of numbers and a number n and returns a list of pairs of numbers from the original list, such that each pair adds up to n. Any given pair of the same two numbers (in any order) should appear only once in the final list and elements in the original list cannot be duplicated (a number can appear more than once in the solution only if it also appears more than once in the original list, as in the case of the number 5 in the example below).
-    -- > sumpairs [5,1,4,0,5,6,9] 10
-    --     [(5,5),(1,9),(4,6)]
+    -- i>   sumpairs [5,1,4,0,5,6,9] 10
+    -- o>   [(5,5),(1,9),(4,6)]
 -- The tuples can appear in any order. You may use library functions or write whatever helper functions you need. 
 
+sumpairs xs v = noDups [(a,b) | a <- xs, b <- xs, a+b == v] 
+
+member'' (a,b) [] = False
+member'' (a,b) ((c,d):ys)
+    | (a,b) == (c,d) = True
+    | otherwise = member (a,b) ys
+
+noDups [] = []
+noDups ((a,b):xs) 
+    | (member'' (a,b) xs || member'' (b,a) xs) = noDups xs
+noDups (x:xs) = x:(noDups xs)
 
