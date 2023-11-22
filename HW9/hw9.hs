@@ -28,13 +28,13 @@ combinations n xs = [y:ys | y:xs' <- tails xs, ys <- combinations (n-1) xs']
 -- Note that this exercise uses foldl instead of foldr. This is an example where foldl is a much more natural choice than foldr. Consider why
 
 dec2int :: [Int] -> Int
-dec2int = foldl (\x y -> 10*x+y) 0 
+dec2int = foldl (\x y -> 10*x+y) 0
 
 
 -- Exercise 3: Generalizing from the previous exercise, write a function base2int :: Int -> String -> Int that takes an argument representing a base and a string representing a number in that base, and returns an integer representing the decimal number expressed by the string.
 -- base2int 2 "10111" --output--> 23
--- Note that this exercise differs from Exercise ? in that the argument determines the base and also in that the function is expected to work on a string rather than a list of numbers. You may want to use digitToInt from the Data.Char library to help with this. You may define helper functions if it's easier or clearer than doing everything inline.
+-- Note that this exercise differs from Exercise 2 in that the argument determines the base and also in that the function is expected to work on a string rather than a list of numbers. You may want to use digitToInt from the Data.Char library to help with this. You may define helper functions if it's easier or clearer than doing everything inline.
 
 base2int :: Int -> String -> Int
-
+base2int b = foldl (\x y -> b*x+ digitToInt y) 0
 
