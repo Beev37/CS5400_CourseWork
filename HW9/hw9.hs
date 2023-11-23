@@ -40,9 +40,12 @@ base2int b = foldl (\x y -> b*x+ digitToInt y) 0
 
 -- Exercise 4: Modify the Caesar cipher program to also handle upper-case letters. You should assume that the distribution of upper case letters is identical to the corresponding distribution of lower-case letters (i.e 'A' has the same probability as 'a'). Capital letters will be encoded analogously to their lower-case equivalents. Thus if 'h' is encoded as 'm' (as in the example below) 'H' will be encoded as 'M'.
 
+-- Changes made in 'Caesar_cipher.hs' file
+
 
 -- Exercise 5: Declare a data type 'Tree as follows:
 data Tree = Leaf Int | Node Tree Int Tree
+--  Tree = Leaf structure | node leftChild nodeValue rightChild
 -- Write a function 'sumtree' that traverses the tree and returns the sum of the integer values of its nodes. For example, a call to 'sumtree' with a tree with three leaves and two non-terminal nodes with the following values:
         -- Tree:
         --     5
@@ -52,6 +55,10 @@ data Tree = Leaf Int | Node Tree Int Tree
 -- i> sumtree (Node (Leaf 5) 5 (Node (Leaf 5) 2 (Laf 3)))
 -- o> 20
 
+sumtree :: Tree -> Int
+sumtree (Leaf n) = n
+sumtree (Node lc n rc) = sumtree lc + sumtree rc + n
+
 
 -- Exercise 6: Declare a data type 'Tree2' as follows:
 data Tree2 = Leaf2 Int | Node2 Tree2 Tree2
@@ -59,6 +66,14 @@ data Tree2 = Leaf2 Int | Node2 Tree2 Tree2
 -- 'balanced :: Tree2 -> Bool' that decides if a tree is balanced or not. Hint: first define a function that returns the number of leaves in a tree.
 
 balanced :: Tree2 -> Bool
+balanced (Leaf2 _) = True
+balanced (Node2 lc rc)
+        | abs (countLeaves lc - countLeaves rc) > 1 = False
+        | otherwise = True
+
+countLeaves :: Tree2 -> Int
+countLeaves (Leaf2 _) = 1
+countLeaves (Node2 lc rc) = countLeaves lc + countLeaves rc 
 
 
 -- Exercise 7: In preparation for working on the Bert Bos puzzle in Haskell, it would be good to establish how to get a list of possible click lists. (The rest of the Bert Bos puzzle can be solved by figuring out how to filter this list down to only the successful click lists).
@@ -68,3 +83,6 @@ balanced :: Tree2 -> Bool
 -- i> sequence [[1,2],[3,4],[5]]
 -- o> [[1,3,5],[1,4,5],[2,3,5],[2,4,5]]
 -- Note: this function may be very useful in the Groningse Grid (Haskell edition) puzzle in the final programming assignment, if you choose that option.
+
+clicklists :: Int -> [[[Char]]]
+

@@ -8,17 +8,23 @@ crack xs = encode (-factor) xs
       chitab = [chisqr (rotate n table') table | n <- [0..25]]
 
 let2int :: Char -> Int
-let2int c = ord c - ord 'a'
+let2int c 
+      | isLower c = ord c - ord 'a'
+      | otherwise = ord c - ord 'A' + 26
 
 int2let :: Int -> Char
-int2let n = chr (ord 'a' + n)
+int2let n 
+      | n <=25 = chr (ord 'a' + n)
+      | otherwise = chr (n + 39)
 
 encode :: Int -> String -> String
 encode n xs = [shift n x | x <- xs]
 
 shift :: Int -> Char -> Char
-shift n c | isLower c = int2let((let2int c + n) `mod` 26)
-          | otherwise = c
+shift n c 
+      | isLower c = int2let((let2int c + n) `mod` 26)
+      | isUpper c = int2let(((let2int c + n) `mod` 26) + 26)
+      | otherwise = c
 
 table :: [Float]
 table = [8.2, 1.5, 2.8, 4.3, 12.7, 2.2, 2.0, 6.1, 7.0, 0.2, 0.8, 4.0, 2.4, 6.7, 7.5, 1.9, 0.1, 6.0, 6.3, 9.1, 2.8, 1.0, 2.4, 0.2, 2.0, 0.1]
