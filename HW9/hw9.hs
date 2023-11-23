@@ -9,9 +9,6 @@ import Data.List (tails)
 -- had to look up solution :( 
 -- https://wiki.haskell.org/99_questions/Solutions/26
 
-
-
-
 combinations :: Int -> [a] -> [[a]]
 combinations 0 _ = [[]]
 combinations n xs = [y:ys | y:xs' <- tails xs, ys <- combinations (n-1) xs']
