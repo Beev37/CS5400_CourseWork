@@ -5,7 +5,6 @@ import Data.List (tails)
 -- Structure: 'combinations :: Int -> [a] -> [[a]]
 -- The 'combinations' function can be written as a recursive list comprehension using the 'tails' function. You can use pattern matching to define a base case for when k is equal to 0. 
 
-
 -- had to look up solution :( 
 -- https://wiki.haskell.org/99_questions/Solutions/26
 
@@ -34,6 +33,7 @@ dec2int = foldl (\x y -> 10*x+y) 0
 
 base2int :: Int -> String -> Int
 base2int b = foldl (\x y -> b*x+ digitToInt y) 0
+
 
 -- Exercise 4: Modify the Caesar cipher program to also handle upper-case letters. You should assume that the distribution of upper case letters is identical to the corresponding distribution of lower-case letters (i.e 'A' has the same probability as 'a'). Capital letters will be encoded analogously to their lower-case equivalents. Thus if 'h' is encoded as 'm' (as in the example below) 'H' will be encoded as 'M'.
 
@@ -82,4 +82,5 @@ countLeaves (Node2 lc rc) = countLeaves lc + countLeaves rc
 -- Note: this function may be very useful in the Groningse Grid (Haskell edition) puzzle in the final programming assignment, if you choose that option.
 
 clicklists :: Int -> [[[Char]]]
-
+clicklists 0 = [[]]
+clicklists n = [y:ys | y <- ["click", "noclick"], ys <- clicklists (n-1)]
