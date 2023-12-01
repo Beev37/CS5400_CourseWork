@@ -34,22 +34,22 @@ showSolution nw =
 -- =============================================================================
 testNetwork1 :: Network
 testNetwork1 = (
-     [('A', Green), ('B', Red)],
-     [('J', Green), ('K', Red)],
+     [('A', Green), ('B', Red)], -- starts
+     [('J', Green), ('K', Red)], -- finals
      [
-       ('A', Green), ('B', Red), ('C', Red), ('D', Red),
-       ('E', Green), ('F', Green), ('G', Green), ('H', Green),
-       ('I', Red), ('J', Green), ('K', Red)
+       ('A', Green), ('B', Red), ('C', Red), ('D', Red),        --
+       ('E', Green), ('F', Green), ('G', Green), ('H', Green),  -- states
+       ('I', Red), ('J', Green), ('K', Red)                     --
      ],
      [
-       ('A', Green, 'C'), ('A', Green, 'F'), ('A', Green, 'D'),
-       ('B', Green, 'D'), ('B', Red, 'D'),
-       ('D', Red, 'F'), ('D', Green, 'F'),('D', Red, 'E'), ('D', Red, 'I'),
-       ('F', Green, 'G'), ('F', Red, 'H'),
-       ('E', Green, 'I'),
-       ('G', Green, 'H'), ('G', Red, 'J'),
-       ('H', Green, 'J'), ('H', Red, 'K'), ('H', Red, 'I'),
-       ('I', Red, 'K')
+       ('A', Green, 'C'), ('A', Green, 'F'), ('A', Green, 'D'),             --
+       ('B', Green, 'D'), ('B', Red, 'D'),                                  --
+       ('D', Red, 'F'), ('D', Green, 'F'),('D', Red, 'E'), ('D', Red, 'I'), --
+       ('F', Green, 'G'), ('F', Red, 'H'),                                  --
+       ('E', Green, 'I'),                                                   -- transitions
+       ('G', Green, 'H'), ('G', Red, 'J'),                                  --
+       ('H', Green, 'J'), ('H', Red, 'K'), ('H', Red, 'I'),                 --
+       ('I', Red, 'K')                                                      --
      ]
    )
 -- Expected outcome for this network
@@ -89,3 +89,5 @@ testNetwork2 = (
 -- ["AFHIL","ADEJL","BDEJL","BDFHIL"]
 -- Matching edge/state sequences:
 -- ["AFIK"]
+
+-- ([('A', Green), ('B', Red)],[('J', Green), ('K', Red)],[('A', Green), ('B', Red), ('C', Red), ('D', Red),('E', Green), ('F', Green), ('G', Green), ('H', Green),('I', Red), ('J', Green), ('K', Red)],[('A', Green, 'C'), ('A', Green, 'F'), ('A', Green, 'D'),('B', Green, 'D'), ('B', Red, 'D'),('D', Red, 'F'), ('D', Green, 'F'),('D', Red, 'E'), ('D', Red, 'I'),('F', Green, 'G'), ('F', Red, 'H'),('E', Green, 'I'),('G', Green, 'H'), ('G', Red, 'J'),('H', Green, 'J'), ('H', Red, 'K'), ('H', Red, 'I'),('I', Red, 'K')])
